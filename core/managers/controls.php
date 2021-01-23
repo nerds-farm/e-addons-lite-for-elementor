@@ -1,8 +1,8 @@
 <?php
 
-namespace EAddonsForElementor\Core\Managers;
+namespace EAddonsLiteForElementor\Core\Managers;
 
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 use Elementor\Core\Base\Module as Module_Base;
 
 if (!defined('ABSPATH')) {
@@ -52,19 +52,19 @@ final class Controls {
         $controls_manager = \Elementor\Plugin::$instance->controls_manager;
         $controls = $this->get_controls();
         foreach ($controls as $control) {
-            $class_name = 'EAddonsForElementor\Core\Controls\\' . $control;
+            $class_name = 'EAddonsLiteForElementor\Core\Controls\\' . $control;
             $control_obj = new $class_name();
             $controls_manager->register_control($control_obj->get_type(), $control_obj);
             $this->controls[$control_obj->get_type()] = $control_obj;
         }
         
         foreach ($this->get_groups() as $group) {
-            $class_name = 'EAddonsForElementor\Core\Controls\Groups\\' . $group;
+            $class_name = 'EAddonsLiteForElementor\Core\Controls\Groups\\' . $group;
             $control_obj = new $class_name();
             $controls_manager->add_group_control($control_obj->get_type(), $control_obj);
         }
         
-        \EAddonsForElementor\Plugin::instance()->assets_manager->register_core_assets(); // TODO: check why this is needed!
+        \EAddonsLiteForElementor\Plugin::instance()->assets_manager->register_core_assets(); // TODO: check why this is needed!
         do_action('e_addons/controls');
     }
 

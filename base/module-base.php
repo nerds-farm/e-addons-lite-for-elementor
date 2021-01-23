@@ -1,8 +1,8 @@
 <?php
 
-namespace EAddonsForElementor\Base;
+namespace EAddonsLiteForElementor\Base;
 
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 use Elementor\Core\Base\Module;
 
 if (!defined('ABSPATH')) {
@@ -202,7 +202,7 @@ abstract class Module_Base extends Module {
         $plugin_path = Utils::get_plugin_path($class_name);
         $assets_path = $plugin_path . 'modules' . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR;
 
-        \EAddonsForElementor\Core\Managers\Assets::register_assets($assets_path);
+        \EAddonsLiteForElementor\Core\Managers\Assets::register_assets($assets_path);
     }
 
     public function init_scripts() {
@@ -212,7 +212,7 @@ abstract class Module_Base extends Module {
         $plugin_path = Utils::get_plugin_path($class_name);
         $assets_path = $plugin_path . 'modules' . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR;
 
-        \EAddonsForElementor\Core\Managers\Assets::register_assets($assets_path, 'js');
+        \EAddonsLiteForElementor\Core\Managers\Assets::register_assets($assets_path, 'js');
     }
 
     public function init_styles() {
@@ -222,7 +222,7 @@ abstract class Module_Base extends Module {
         $plugin_path = Utils::get_plugin_path($class_name);
         $assets_path = $plugin_path . 'modules' . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR;
 
-        \EAddonsForElementor\Core\Managers\Assets::register_assets($assets_path, 'css');
+        \EAddonsLiteForElementor\Core\Managers\Assets::register_assets($assets_path, 'css');
     }
 
     public function init_tabs() {        

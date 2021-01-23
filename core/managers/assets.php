@@ -1,8 +1,8 @@
 <?php
 
-namespace EAddonsForElementor\Core\Managers;
+namespace EAddonsLiteForElementor\Core\Managers;
 
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly

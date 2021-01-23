@@ -1,14 +1,11 @@
 <?php
 
-namespace EAddonsForElementor;
+namespace EAddonsLiteForElementor;
 
-use EAddonsForElementor\Core\Utils;
-use EAddonsForElementor\Core\Managers\Modules;
-use EAddonsForElementor\Core\Managers\Assets;
-//use EAddonsForElementor\Core\Managers\Version;
-use EAddonsForElementor\Core\Managers\Template;
-use EAddonsForElementor\Core\Managers\Controls;
-use EAddonsForElementor\Core\Managers\License;
+use EAddonsLiteForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Managers\Modules;
+use EAddonsLiteForElementor\Core\Managers\Assets;
+use EAddonsLiteForElementor\Core\Managers\Controls;
 
 /**
  * Main Plugin Class
@@ -44,12 +41,7 @@ class Plugin {
      */
     public $modules_manager;
     public $assets_manager;
-    public $version_manager;
-    public $template_manager;
-    public $licenses_manager;
-    public $ajax_manager;
-    public $addons_manager = [];
-
+    
     /**
      * Constructor
      *
@@ -66,17 +58,7 @@ class Plugin {
         spl_autoload_register([$this, 'autoload']);
 
         $this->setup_hooks();
-
-        if (empty(self::$instance)) {
-            // core plugin
-            $this->licenses_manager = new License();  
-        } else {
-            // extra plugin
-            $this->maybe_vendor_autoload();
-            self::instance()->add_addon($this);                      
-            self::instance()->licenses_manager->init_license($this);
-            do_action('e_addons/init_license', $this);
-        }
+        
     }
 
     /**
@@ -114,12 +96,12 @@ class Plugin {
 
         if (!class_exists($class)) {
 
-            $filename = \EAddonsForElementor\Core\Helper::class_to_path($class);
+            $filename = \EAddonsLiteForElementor\Core\Helper::class_to_path($class);
             if (is_readable($filename)) {
                 include_once( $filename );
             } else {
                 // fallback
-                $plugin_path = \EAddonsForElementor\Core\Helper::get_plugin_path($class);
+                $plugin_path = \EAddonsLiteForElementor\Core\Helper::get_plugin_path($class);
                 $tmp = explode(DIRECTORY_SEPARATOR, $plugin_path);
                 $tmp = array_filter($tmp);
                 $plugin_name = end($tmp);
@@ -139,12 +121,6 @@ class Plugin {
     public function setup_hooks() {
         // fire actions
         add_action('elementor/init', [$this, 'on_elementor_init']);
-        
-        add_filter("extra_plugin_headers", function($extra_headers) {
-            $extra_headers['Free'] = 'Free';
-            $extra_headers['Channel'] = 'Channel';
-            return $extra_headers;
-        });
     }
 
     /**
@@ -158,19 +134,15 @@ class Plugin {
 
         $this->assets_manager = new Assets();
         $this->controls_manager = new Controls();
-        $this->modules_manager = new Modules();
-        $this->template_manager = new Template();        
-        
-        $this->ajax_manager = new \EAddonsForElementor\Core\Ajax\Actions();
-                
+        $this->modules_manager = new Modules();  
+                        
         if (is_admin()) {
-            //$ajax = new \EAddonsForElementor\Core\Ajax\Actions();
-            $dash = new \EAddonsForElementor\Core\Dashboard\Dashboard();
+            $dash = new \EAddonsLiteForElementor\Core\Dashboard\Dashboard();
         }
 
         do_action('e_addons/init');
     }
-
+    
     public function get_plugins() {
         $plugins = array();
         $wp_plugin_dir = str_replace('/', DIRECTORY_SEPARATOR, WP_PLUGIN_DIR);
@@ -338,77 +310,5 @@ class Plugin {
         }
         return $plugins;
     }
-
-    /**
-     * Licenses init
-     *
-     * @since 1.0.1
-     *
-     * @access private
-     */
-    public function init_versions() {
-        if (is_admin()) {
-            require_once ABSPATH . 'wp-admin' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'file.php';
-            require_once ABSPATH . 'wp-admin' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-wp-upgrader.php';
-            require_once(E_ADDONS_PATH . 'core' . DIRECTORY_SEPARATOR . 'managers' . DIRECTORY_SEPARATOR . 'version.php');
-            $this->version_manager = new \EAddonsForElementor\Core\Managers\Version();
-        }
-    }
-
-    public function maybe_vendor_autoload($TextDomain = '') {
-        $addon = $this->get_addon($TextDomain);
-        if ($this->has_vendors($TextDomain)) {
-            $file = $addon['path']. DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
-            if (file_exists($file)) {
-                require_once $file;
-            }
-        }
-    }
-    public function has_vendors($TextDomain = '') {
-        $addon = $this->get_addon($TextDomain);
-        if (empty($addon['path'])) {
-            return false;
-        }
-        $composer = $addon['path'].DIRECTORY_SEPARATOR.'composer.json';
-        return file_exists($composer);
-    }
-    public function update_vendors($TextDomain = '') {
-        $wdir = getcwd();
-        $addon = $this->get_addon($TextDomain);
-        if (!empty($addon['path'])) {
-            $home = WP_CONTENT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'composer'.DIRECTORY_SEPARATOR;
-            if (!is_dir($home)) {
-                // create dir
-                mkdir($home, 0755, true);
-            }
-
-            $composer = $home.'composer.phar'; 
-            if (!file_exists($home.'composer.phar')) {
-                $composer_phar = 'https://getcomposer.org/composer-stable.phar';
-                $tmp_file = download_url( $composer_phar );                       
-                // Copies the file to the final destination and deletes temporary file.
-                copy( $tmp_file, $composer );
-                @unlink( $tmp_file );
-            }
-
-            if (file_exists($composer)) {
-                //var_dump(getcwd());
-                chdir($addon['path']);
-                $command = 'php '.$composer.' update 2>&1';                
-                //$result = shell_exec('export COMPOSER_HOME='.$home.'./.config/composer;');
-                //shell_exec('COMPOSER_ALLOW_XDEBUG=1 php -d xdebug.remote_enable=0 -d xdebug.profiler_enable=0 -d xdebug.default_enable=0 composer.phar --version 2>&1');
-                //$result = shell_exec('php composer.phar --version 2>&1');
-                $command = "export COMPOSER_HOME=".$home.".config/composer; ".$command;
-                $result = shell_exec($command);
-                //var_dump($command); var_dump($result); die();
-                //exec( $command, $output, $return_var ); var_dump($output);var_dump($return_var);
-                if ($result) {
-                    $msg = __('All Vendors in '.$addon['Name'].' are succefully updated');
-                    Utils::e_admin_notice($msg, 'success');
-                }
-            }
-
-            chdir($wdir);
-        }
-    }
+    
 }

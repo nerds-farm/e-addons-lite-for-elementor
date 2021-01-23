@@ -1,6 +1,6 @@
 <?php
 
-namespace EAddonsForElementor\Core;
+namespace EAddonsLiteForElementor\Core;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -12,16 +12,8 @@ if (!defined('ABSPATH')) {
  * @since 1.0.1
  */
 class Utils {
-
-    use \EAddonsForElementor\Core\Traits\Plugin;
-    use \EAddonsForElementor\Core\Traits\Wordpress;
-    use \EAddonsForElementor\Core\Traits\Post;
-    use \EAddonsForElementor\Core\Traits\User;
-    use \EAddonsForElementor\Core\Traits\Term;
-    use \EAddonsForElementor\Core\Traits\Comment;
-    use \EAddonsForElementor\Core\Traits\Elementor;
-    use \EAddonsForElementor\Core\Traits\Data;    
-    use \EAddonsForElementor\Core\Traits\Path;
+    
+    use \EAddonsLiteForElementor\Core\Traits\Data;
 
     public static function get_dynamic_data($value, $fields = array(), $var = '') {
         if (!empty($value)) {
@@ -48,4 +40,24 @@ class Utils {
         return Helper::slug_to_camel($title, $separator);
     }
 
+    public static function e_admin_notice($msg = '', $level = 'warning', $dismissible = true) {
+        $msg = Utils::to_string($msg);
+        ?>
+        <div class="e-add-notiice <?php echo $level . ' notice-' . $level; ?> notice<?php echo $dismissible ? ' is-dismissible' : ''; ?>">
+            <i class="eadd-logo-e-addons"></i>
+            <p>
+                <strong>e-addons:</strong> 
+                <?php _e($msg, 'e-addons-for-elementor'); ?>
+            </p>
+        </div>
+        <?php
+    }
+    
+    public static function get_addons($core = false) {
+        $all_addons = array();
+        if (!$core) {
+            unset($all_addons['e-addons-for-elementor']);
+        }
+        return $all_addons;
+    }
 }

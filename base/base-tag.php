@@ -1,9 +1,9 @@
 <?php
 
-namespace EAddonsForElementor\Base;
+namespace EAddonsLiteForElementor\Base;
 
 use Elementor\Core\DynamicTags\Tag;
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -13,7 +13,7 @@ abstract class Base_Tag extends Tag {
 
     public $is_data = false;
 
-    use \EAddonsForElementor\Base\Traits\Base;
+    use \EAddonsLiteForElementor\Base\Traits\Base;
 
     public function get_group() {
         return 'e-addons';

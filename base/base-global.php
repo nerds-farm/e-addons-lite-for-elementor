@@ -1,8 +1,8 @@
 <?php
 
-namespace EAddonsForElementor\Base;
+namespace EAddonsLiteForElementor\Base;
 
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 use Elementor\Element_Base;
 
 if (!defined('ABSPATH')) {
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 abstract class Base_Global extends Element_Base {
 
-    use \EAddonsForElementor\Base\Traits\Base;
+    use \EAddonsLiteForElementor\Base\Traits\Base;
 
     public function get_icon() {
         return 'eicon-globe';

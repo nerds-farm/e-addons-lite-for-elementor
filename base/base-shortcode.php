@@ -1,6 +1,6 @@
 <?php
 
-namespace EAddonsForElementor\Base;
+namespace EAddonsLiteForElementor\Base;
 
 use Elementor\Element_Base;
 
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 
 class Base_Shortcode extends Element_Base {
 
-    use \EAddonsForElementor\Base\Traits\Base;
+    use \EAddonsLiteForElementor\Base\Traits\Base;
 
     public function get_name() {
         return 'e-addons-shortcode';

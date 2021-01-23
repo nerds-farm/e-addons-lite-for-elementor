@@ -1,8 +1,8 @@
 <?php
 
-namespace EAddonsForElementor\Base;
+namespace EAddonsLiteForElementor\Base;
 
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 use Elementor\Element_Base;
 use Elementor\Controls_Manager;
 
@@ -35,7 +35,7 @@ abstract class Base_Extension extends Element_Base {
     
     public static $common_sections = [];
 
-    use \EAddonsForElementor\Base\Traits\Base;
+    use \EAddonsLiteForElementor\Base\Traits\Base;
 
     public function __construct() {
         parent::__construct();

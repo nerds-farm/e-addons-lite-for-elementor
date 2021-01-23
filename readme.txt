@@ -1,11 +1,11 @@
 === e-addons for Elementor ===
 Contributors: nerdsfarm, poglie, frapesce
 Donate link: https://e-addons.com/donate/
-Tags: elementor, addons, extension, dynamic, template, token, widget, module, design
+Tags: elementor, addons, extension, dynamic, widget, module, design
 Requires at least: 5.0
-Tested up to: 5.6.1
+Tested up to: 5.6.2
 Elementor tested up to: 3.2.0
-Stable tag: 2.2.2.2
+Stable tag: 2.0.1
 Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -97,52 +97,8 @@ Absolutely not! But for an advanced use it's better to understand Wordpress logi
 
 == Changelog ==
 
-= 2.2.2.2 - 20-01-2021 =
-* Update: PRO addons
-* Fix: PRO Update from e-Dash 
-
-= 2.2.2 - 20-01-2021 =
-* Add: PRO addons
-* Fix: minor fixes
-
-= 2.2.1 - 08-01-2021 =
-* Add: Query module
-* Add: Form utils
-* Fix: Translate Control
-* Fix: Dynamic Tags Controls
-* Fix: minor fixes
-
-= 2.2 - 04-01-2021 =
-* Add: Control Element ID
-* Add: Ajax action Metas Attachment
-* Update: e-addons Icon Library
-* Update: removed default common sections on Extensions
-* Fix: Ajax action Posts
-* Fix: minor fixes
-
-= 2.1.1 - 22-12-2020 =
-* Add: Ajax action Term Posts
-* Add: methods on Base Action
-* Fix: jQuery in e-addons Dashboard
-* Fix: Data Dynamic Tags
-* Fix: Compatibility with Elementor 3.1.0
-
-= 2.1 - 14-12-2020 =
-* Increase: support for Actions
-* Increase: support for Dynamic Tags Data
-* Update: e-addons Icon Library
-* Fix: minor fixes
-
 = 2.0.1 - 30-11-2020 =
-* Tweak: module switcher on Settings and Restore
-* Fix: user field getter
-
-= 2.0 - 20-11-2020 =
-* New: no more limits to the Core
-* New: automatic update Vendor
-* Theme: Dashboard colors
-* Fix: Extensions integration
-* Fix: plugin translation
+* New: completely new version
 
 = 1.2 - 12-10-2020 =
 * Add: Control Masking

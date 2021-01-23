@@ -1,6 +1,6 @@
 <?php
 
-namespace EAddonsForElementor\Core\Traits;
+namespace EAddonsLiteForElementor\Core\Traits;
 
 /**
  * @author francesco
@@ -45,6 +45,9 @@ trait Data {
      */
     public static function implode($pieces = array(), $glue = ', ', $listed = false) {
         $string = '';
+        if (is_string($pieces)) {
+            $string = $pieces;
+        }
         if (!empty($pieces) && is_array($pieces)) {
             if ($listed) {
                 $string .= (is_string($listed)) ? '<'.$listed.'>' : '<ul>';

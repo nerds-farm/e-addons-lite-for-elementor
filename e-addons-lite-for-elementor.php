@@ -6,10 +6,10 @@
  * Plugin Name:       e-addons Lite for Elementor
  * Plugin URI:        https://e-addons.com
  * Description:       The new must-have tool-set for web experts. Exploit Elementor limitless potential, with powerful widgets & extensions, and boost your workflow.
- * Version:           1.0.1
+ * Version:           2.0.1
  * Author:            Nerds Farm
  * Author URI:        https://nerds.farm
- * Text Domain:       e-addons-for-elementor
+ * Text Domain:       e-addons-lite-for-elementor
  * Domain Path:       /languages
  * License:           GPL-3.0
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
@@ -52,9 +52,7 @@ function e_addons_load_plugin() {
     if (did_action('elementor/loaded')) {
         // Require the main plugin file
         require_once( __DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'plugin.php' );
-        $plugin = \EAddonsForElementor\Plugin::instance();
-        $plugin->init_versions();
-        do_action('e_addons/loaded');
+        $plugin = \EAddonsLiteForElementor\Plugin::instance();
     } else {
         add_action('admin_notices', function() {
             $message = __('You need to activate "Elementor Free" in order to use "e-addons for Elementor" plugin.', 'elementor');

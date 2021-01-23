@@ -10,7 +10,7 @@ if (!current_user_can('manage_options')) {
 
     <h1 class="e_addons-title"><span class="e_addons_ic elementor-icon eicon-info-circle-o"></span> Changelog</h1>
     <?php
-    $e_addons_plugins = \EAddonsForElementor\Plugin::instance()->get_addons(true);
+    $e_addons_plugins = \EAddonsLiteForElementor\Plugin::instance()->get_addons(true);
     foreach ($e_addons_plugins as $e_plugin) {
         $changelog_file = $e_plugin['path'] . '/readme.txt';
         if (file_exists($changelog_file)) {

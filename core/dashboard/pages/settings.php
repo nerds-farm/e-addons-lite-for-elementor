@@ -1,17 +1,17 @@
 <?php
 
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 
 // check user capabilities
 if (!current_user_can('manage_options')) {
     return;
 }
 
-\EAddonsForElementor\Plugin::instance()->assets_manager->enqueue_icons();
+\EAddonsLiteForElementor\Plugin::instance()->assets_manager->enqueue_icons();
 
-$modules_manager = \EAddonsForElementor\Plugin::instance()->modules_manager;
+$modules_manager = \EAddonsLiteForElementor\Plugin::instance()->modules_manager;
 $folders = array('widgets', 'extensions', 'tags', 'skins', 'globals', 'actions', 'shortcodes', 'tweaks', 'fields', 'controls');
-$e_addons_plugins = \EAddonsForElementor\Plugin::instance()->get_addons(true);
+$e_addons_plugins = \EAddonsLiteForElementor\Plugin::instance()->get_addons(true);
 ?>
 <div class="wrap nav-menus-php">
 
@@ -49,7 +49,7 @@ $e_addons_plugins = \EAddonsForElementor\Plugin::instance()->get_addons(true);
                                 continue;
 
                             if ($amod != 'disable' || $folder != 'widgets') {
-                                $class = \EAddonsForElementor\Core\Helper::path_to_class($afile);
+                                $class = \EAddonsLiteForElementor\Core\Helper::path_to_class($afile);
                                 $element = new $class();
                                 if (method_exists($element, 'show_in_settings')) {
                                     if (!$element->show_in_settings()) {
@@ -207,7 +207,7 @@ $e_addons_plugins = \EAddonsForElementor\Plugin::instance()->get_addons(true);
                                                                                     $checked = (!empty($e_addons_disabled[$folder][$amod]) && in_array($file_name, $e_addons_disabled[$folder][$amod])) ? '' : ' checked';
                                                                                     $file_label = Utils::slug_to_camel($file_name, ' ');
 
-                                                                                    $class = \EAddonsForElementor\Core\Helper::path_to_class($afile);
+                                                                                    $class = \EAddonsLiteForElementor\Core\Helper::path_to_class($afile);
                                                                                     //echo ' (' . $class . ')';
 
                                                                                     $element = new $class();

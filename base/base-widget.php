@@ -1,8 +1,8 @@
 <?php
 
-namespace EAddonsForElementor\Base;
+namespace EAddonsLiteForElementor\Base;
 
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 use Elementor\Widget_Base;
 
 if (!defined('ABSPATH')) {
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 abstract class Base_Widget extends Widget_Base {
 
-    use \EAddonsForElementor\Base\Traits\Base;
+    use \EAddonsLiteForElementor\Base\Traits\Base;
 
     public function __construct($data = [], $args = null) {
         parent::__construct($data, $args);

@@ -1,8 +1,8 @@
 <?php
 
-namespace EAddonsForElementor\Base\Traits;
+namespace EAddonsLiteForElementor\Base\Traits;
 
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 
 /**
  * @author francesco
@@ -10,134 +10,6 @@ use EAddonsForElementor\Core\Utils;
 trait Base {
 
     public $eaddon_url = 'https://e-addons.com';
-    public $operator_options = [
-        'empty' => 'Empty',
-        'not_empty' => 'Not Empty',
-        'lt' => 'Less than',
-        'lte' => 'Less than equal',
-        'gt' => 'Greater than',
-        'gte' => 'Greater than equal',
-        'contain' => 'Contain',
-        'not_contain' => 'Not Contain',
-        'in_array' => 'In Array',
-        'equal' => 'Equal to',
-        'not_equal' => 'Not Equal to',
-    ];
-    public $form_operator_options = array(
-        "empty" => 'Empty',
-        "not_empty" => 'Not Empty',
-        "equal" => "Equals to",
-        "not_equal" => 'Not Equal to',
-        "gt" => "Greater than",
-        "ge" => 'Greater than equal',
-        "lt" => "Less than",
-        "le" => 'Less than equal',
-        "contain" => "Contain",
-        "not_contain" => 'Not Contain',
-        "is_checked" => "Is Checked",
-        "not_checked" => "Not Checked",
-    );
-
-    public function check_condition($field, $operator, $value) {
-        $value = Utils::get_dynamic_data($value);        
-        switch ($operator) {
-            case 'empty':
-                return Utils::empty($field);
-                break;
-            case 'not_empty':
-                return !Utils::empty($field);
-                break;
-            case 'lt':
-                if (is_array($field) && count($field) < $value) {
-                    return true;
-                }
-                if (!empty($field) && $field < $value) {
-                    return true;
-                }
-                break;
-            case 'le':
-            case 'lte':
-                if (is_array($field) && count($field) <= $value) {
-                    return true;
-                }
-                if (!empty($field) && $field <= $value) {
-                    return true;
-                }
-                break;
-            case 'gt':
-                if (is_array($field) && count($field) > $value) {
-                    return true;
-                }
-                if (!empty($field) && $field > $value) {
-                    return true;
-                }
-                break;
-            case 'ge':
-            case 'gte':
-                if (is_array($field) && count($field) >= $value) {
-                    return true;
-                }
-                if (!empty($field) && $field >= $value) {
-                    return true;
-                }
-                break;
-            case 'contain':
-                if (!empty($field)) {
-                    if (is_array($field) && in_array($value, $field)) {
-                        return true;
-                    }
-                }
-                if (is_string($field) && strpos($field, $value) !== false) {
-                    return true;
-                }
-                break;
-            case 'not_contain':
-                if (empty($field)) {
-                    return true;
-                }
-                if (is_array($field) && !in_array($value, $field)) {
-                    return true;
-                }
-                if (is_string($field) && strpos($field, $value) === false) {
-                    return true;
-                }
-                break;
-            case 'in_array':
-                if (!is_array($value)) {
-                    $value = Utils::to_string($value);
-                    $value = Utils::explode($value);
-                }
-                if (is_array($value) && in_array($field, $value)) {
-                    return true;
-                }
-                break;
-            case 'equal':
-                return $field == $value;
-                break;
-            case 'not_equal':
-                return $field != $value;
-                break;
-            case 'is_checked':
-                if ($value) {
-                    if (!is_array($field) || empty($field)) {
-                        return false;
-                    }
-                    return in_array($value, $field);
-                }
-                return !empty($field);
-                break;
-            case 'not_checked':
-                if ($value) {
-                    if (!is_array($field) || empty($field)) {
-                        return true;
-                    }
-                    return !in_array($value, $field);
-                }
-                return empty($field);
-                break;
-        }
-        return false;
-    }
 
     // the Post ID on e-Addon site
     public function get_pid() {
@@ -238,7 +110,7 @@ trait Base {
         if (!$slug) {
             $slug = $this->get_module_slug();
         }
-        $module = \EAddonsForElementor\Plugin::instance()->modules_manager->get_modules($slug);        
+        $module = \EAddonsLiteForElementor\Plugin::instance()->modules_manager->get_modules($slug);        
         return $module;
     }
     

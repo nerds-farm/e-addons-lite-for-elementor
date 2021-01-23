@@ -1,6 +1,6 @@
 <?php
 
-namespace EAddonsForElementor\Core;
+namespace EAddonsLiteForElementor\Core;
 
 /**
  * Description of Helper

@@ -1,11 +1,10 @@
 <?php
 
-namespace EAddonsForElementor\Core\Dashboard;
+namespace EAddonsLiteForElementor\Core\Dashboard;
 
-use EAddonsForElementor\Core\Utils;
-use EAddonsForElementor\Base\Module_Base;
+use EAddonsLiteForElementor\Core\Utils;
+use EAddonsLiteForElementor\Base\Module_Base;
 use Elementor\Settings;
-use EAddonsForElementor\Includes\Edd\Edd;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -18,11 +17,6 @@ class Dashboard {
         add_action('admin_enqueue_scripts', [$this, 'add_admin_dash_assets']);
 
         add_action("elementor/admin/after_create_settings/elementor", array($this, 'e_addons_elementor'));
-        
-        $addons = \EAddonsForElementor\Plugin::instance()->get_addons();
-        foreach ($addons as $akey => $addon) {
-            add_filter('plugin_action_links_' . $addon['plugin'], [$this, 'e_plugin_action_links_settings']);
-        }
     }
     
    public function e_plugin_action_links_settings($links) {
@@ -51,7 +45,7 @@ class Dashboard {
                 'e_addons',
                 [
                     $this,
-                    'e_addons_settings'
+                    'settings'
                 ],
                 'dashicons-admin-generic',
                 '58.5'

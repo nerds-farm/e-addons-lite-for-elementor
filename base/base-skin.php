@@ -1,11 +1,11 @@
 <?php
 
-namespace EAddonsForElementor\Base;
+namespace EAddonsLiteForElementor\Base;
 
 use Elementor\Element_Base;
 use Elementor\Widget_Base;
 use Elementor\Group_Control_Image_Size;
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 
 class Base_Skin extends \Elementor\Skin_Base {
 
-    use \EAddonsForElementor\Base\Traits\Base;
+    use \EAddonsLiteForElementor\Base\Traits\Base;
 
     /**
      * Skin base constructor.

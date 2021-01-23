@@ -1,8 +1,8 @@
 <?php
 
-namespace EAddonsForElementor\Core\Managers;
+namespace EAddonsLiteForElementor\Core\Managers;
 
-use EAddonsForElementor\Core\Utils;
+use EAddonsLiteForElementor\Core\Utils;
 use Elementor\Core\Base\Module as Module_Base;
 
 if (!defined('ABSPATH')) {
@@ -20,8 +20,6 @@ final class Modules {
 
         $modules = $this->find_modules(E_ADDONS_PATH);
         $this->add_modules($modules);
-
-        do_action('e_addons/modules');
     }
 
     public function find_modules($plugin_path = '') {
@@ -40,7 +38,7 @@ final class Modules {
         return $modules;
     }
 
-    public function add_modules($modules = array(), $domain = 'EAddonsForElementor') {
+    public function add_modules($modules = array(), $domain = 'EAddonsLiteForElementor') {
 
         foreach ($modules as $module_name) {
             //include_once(WP_PLUGIN_DIR.'/'.Utils::camel_to_slug($domain).'/modules/'.$module_name.'/'.$module_name.'.php');
